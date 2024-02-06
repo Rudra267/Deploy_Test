@@ -8,9 +8,9 @@ router.use(express.json());
 router.use(cors());
 
 router.post('/register', async (req, resp) => {
-    const { fname, email, password, cPassword } = req.body;
+    const { fname, email, password, cPassword, mobileNumber} = req.body;
 
-    if (!fname || !email || !password || !cPassword) {
+    if (!fname || !email || !password || !cPassword || !mobileNumber) {
         return resp.status(401).json({ message: "Fill the required fields" });
     }
 
@@ -24,7 +24,7 @@ router.post('/register', async (req, resp) => {
         } else {
             // Hash the password before saving it to the database
 
-            const data = new registerUsers({ fname, email, password, cPassword });
+            const data = new registerUsers({ fname, email, password, cPassword, mobileNumber });
 
             const storeData = await data.save();
             console.log(storeData);
